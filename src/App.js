@@ -12,7 +12,7 @@ import SearchItem from './searchItem';
 
 
 function App(){
-  const [items,setItems] = useState(JSON.parse(localStorage.getItem('todo_list'))
+  const [items,setItems] = useState([])
     // [
     //   {
     //     id: 1,
@@ -30,14 +30,13 @@ function App(){
     //     item: "Read about AI"
     //   }
     // ]
-  );
+  
      
     const [newItem, setNewItem]=useState('')
     const [search,setSearch]=useState('')
       
     useEffect(() =>{
-      console.log("Dummy")
-    },[items])
+      JSON.parse(localStorage.getItem('todo_list'))},[])
 
     const addItem =(item) =>{
       const id =items.length ? items[items.length-1].id+1 : 1;
