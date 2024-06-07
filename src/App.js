@@ -12,7 +12,9 @@ import SearchItem from './searchItem';
 
 
 function App(){
-  const [items,setItems] = useState([])
+
+  const API_URL = "http://localhost:3000/items";
+  const [items,setItems] = useState([]);
     // [
     //   {
     //     id: 1,
@@ -32,11 +34,30 @@ function App(){
     // ]
   
      
-    const [newItem, setNewItem]=useState('')
-    const [search,setSearch]=useState('')
+    const [newItem, setNewItem] = useState('');
+    const [search,setSearch] = useState('');
+     const [fetchError,setFetchError] = useState(null)
+     const [isLoading,setIsLoading] = useState(true)
+    useEffect(()=>{ const fetchItems= async ()=>{
+        try{
+          const response = await fetch(API_URL);
+          if(!response.ok) throw Error("Data not received")
+          const listItems = await response.json();
+          setItems(listItems)
+          setFetchError(null)
+        }
+        catch(err){
+          setFetchError(err.message)
+        }
+        finally{
+          setIsLoading(false)
+        }
+      }
+      setTimeout(()=>{
+        (async()=> await fetchItems())()
+      },2000)
       
-    useEffect(() =>{
-      JSON.parse(localStorage.getItem('todo_list'))},[])
+    },[])
 
     const addItem =(item) =>{
       const id =items.length ? items[items.length-1].id+1 : 1;
@@ -81,12 +102,16 @@ function App(){
       search={search}
       setSearch={setSearch}
       />
-
-      <Content
-        items = {items.filter(item =>(item.item).toLowerCase().includes(search.toLowerCase()))}
-        handleCheck = {handleCheck}
-        handleDelete = {handleDelete}
-      /> 
+      <main>
+        {isLoading && <p>Your Data is Loading..</p>}
+        {fetchError && <p>{`Error:${fetchError}`} </p>}
+        {!isLoading && !fetchError && <Content
+          items = {items.filter(item =>(item.item).toLowerCase().includes(search.toLowerCase()))}
+          handleCheck = {handleCheck}
+          handleDelete = {handleDelete}
+        />}
+        
+      </main>
       <Footer 
        length = {items.length}
       />           

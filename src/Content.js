@@ -18,7 +18,7 @@ const Content = ({items,handleCheck,handleDelete}) => {
     //   }  
       
   return (
-    <main>
+    <>
        {/* <p>Let's {handleNameChange()} Together.</p>
       <button onClick={()=>handleClick2('')}> Click Me</button>  */}
 
@@ -36,7 +36,7 @@ const Content = ({items,handleCheck,handleDelete}) => {
         <p style={{color:'red'}}>Your list is Empty !</p>
        )}
        
-    </main>
+    </>
     
   );
 }
