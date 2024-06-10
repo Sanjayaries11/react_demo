@@ -38,6 +38,7 @@ function App(){
     const [search,setSearch] = useState('');
      const [fetchError,setFetchError] = useState(null)
      const [isLoading,setIsLoading] = useState(true)
+     
     useEffect(()=>{ const fetchItems= async ()=>{
         try{
           const response = await fetch(API_URL);
