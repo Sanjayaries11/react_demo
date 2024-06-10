@@ -8,7 +8,6 @@ const SearchItem = ({search,setSearch}) => {
         <input 
         type='text'
         id='search'
-        role='SearchBox'
         autoComplete='off'
         placeholder='Search Item'
         value={search}
