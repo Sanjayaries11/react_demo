@@ -1,0 +1,7 @@
+Select db file->open terminal :
+     npx json-server -p3000 -w data/db.json
+
+
+
+open new terminal to run project :
+        npm start
